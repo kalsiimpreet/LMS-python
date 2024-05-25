@@ -52,7 +52,7 @@ class Library:
         if self.borrowed_books:
             for book in self.borrowed_books:
                 if book["name"] == returnedBook:
-                    if book["quantity_borrowed"] == 1 and qty == 1:
+                    if book["quantity_borrowed"] == qty:
                         del self.borrowed_books[book]
                     else:
                         book["quantity_borrowed"] -= qty
@@ -62,10 +62,10 @@ class Library:
                             print("Thanks for returning the book(s)!")
                             check = True
         if not check:
-            print("""Sorry! It seems like this book doesn't belong to this library 
-                     but we would be honoured by this addition."
-                     Would you like to donate it to our library?")
-                     Enter 'Y' to continue or 'N' to return to the main menu""")
+            print("""Sorry! It seems like this book doesn't belong to this library \
+            but we would be honoured by this addition."\
+            Would you like to donate it to our library?"\
+            Enter 'Y' to continue or 'N' to return to the main menu""")
             answer = input()
             if answer == 'Y':
                 self.addBook(returnedBook, qty)
@@ -105,7 +105,8 @@ def main():
             library.returnBook(book)
         elif choice == 4:
             book = input("Enter the book you would like to add : ")
-            library.addBook(book, 1)
+            qty = int(input("How many copies would you like to donate? "))
+            library.addBook(book, qty)
         elif choice == 5:
             sys.exit()
 
