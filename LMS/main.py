@@ -6,7 +6,6 @@ class Library:
 
     def __init__(self, listOfBooks):
         self.availableBooks = listOfBooks
-        self.backup = listOfBooks
         self.borrowed_books = []
 
     def displayAvailableBooks(self):
@@ -43,7 +42,6 @@ class Library:
             "quantity": qty
                 }
         self.availableBooks.append(book)
-        self.backup.append(book)
         print("Thanks for the new addition to our Library!")
 
     def returnBook(self, returnedBook):
