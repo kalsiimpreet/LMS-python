@@ -1,3 +1,4 @@
+"""LIBRARY MANAGEMENT SYSTEM"""
 import sys
 
 
@@ -40,7 +41,7 @@ class Library:
             "name": newBook,
             "author": author,
             "quantity": qty
-                }
+        }
         self.availableBooks.append(book)
         print("Thanks for the new addition to our Library!")
 
