@@ -87,11 +87,14 @@ class Library:
     #         else:
     #             return
 
-    def return_book(self, returned_book, current_customer: Customer):
-        book: Book = current_customer.get_book(returned_book)
-        current_customer.remove_book(book)
-        self.insert_to_catalog(book)
-        print("Thanks for returning the book!")
+    def return_book(self, returned_book: str, auth: str, vol: int, current_customer: Customer):
+        book: Book = current_customer.search_book(returned_book, auth, vol)
+        if book:
+            current_customer.remove_book(book)
+            self.insert_to_catalog(book)
+            print("Thanks for returning the book!")
+        else:
+            print("It doesn't seem that the book was borrowed from this library. Please try again!")
 
     def number_of_books_available(self, book) -> int:
         for book1 in self.availableBooks:
@@ -129,4 +132,4 @@ class Library:
 
     def print_books(self, books: list[Book]):
         for i, book in enumerate(books):
-            print(f'{i + 1}. {book.name} by {book.author} - Volume {book.volume}')
+            print(f'{i + 1}. {book.name} by {book.author} - Volume {book.volume} . Copies available: {book.quantity}')

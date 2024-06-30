@@ -13,8 +13,22 @@ def request_book_flow(library: Library, cust: Customer):
     print("Following book(s) seem to match your search. Kindly choose the required book by its serial number :")
     library.print_books(alike_books)
     sr_no_of_chosen_book: int = int(input())
+    if sr_no_of_chosen_book > len(alike_books):
+        print("Seems like you chose a wrong option. Enter 'Y' to continue or 'N' to exit: ")
+        option = input()
+        if option.upper() == 'Y':
+            request_book_flow(library, cust)
+        else:
+            return
     chosen_book: Book = alike_books[sr_no_of_chosen_book - 1]
     library.issue_book(chosen_book, cust)
+
+
+def return_book_flow(library: Library, cust: Customer):
+    book = input("Enter the book you would like to return : ")
+    author = input("Enter the author : ")
+    vol = int(input("Enter Volume of book : "))
+    library.return_book(book, author, vol, cust)
 
 
 def main():
@@ -54,8 +68,7 @@ def main():
             elif choice == 2:
                 request_book_flow(library, cust)
             elif choice == 3:
-                book = input("Enter the book you would like to return : ")
-                library.return_book(book, cust)
+                return_book_flow(library, cust)
             elif choice == 4:
                 book = input("Enter the book you would like to add : ")
                 qty = int(input("How many copies would you like to donate? "))

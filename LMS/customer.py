@@ -14,9 +14,15 @@ class Customer:
     def add_book(self, book: Book):
         self.bag.append(book)
 
-    def get_book(self, check_book: str) -> Book:
+    def get_books(self, check_book: str) -> Book:
         for book in self.bag:
-            if book.name == check_book:
+            if check_book in book.name:
+                return book
+
+    def search_book(self, book_name: str, author_name: str, vol: int):
+        for book in self.bag:
+            if (book_name.lower() in book.name.lower() and author_name.lower() in book.author.lower() and vol ==
+                    book.volume):
                 return book
 
     def remove_book(self, book: Book):
