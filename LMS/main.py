@@ -1,88 +1,17 @@
 """LIBRARY MANAGEMENT SYSTEM"""
 import sys
 
-
-class Library:
-    """Class Library would LIST, LEND, RETURN or ADD book(s) to the library as per the input by the user"""
-
-    def __init__(self, listOfBooks):
-        self.availableBooks = listOfBooks
-        self.borrowed_books = []
-
-    def displayAvailableBooks(self):
-        print("The books available in the library are : ")
-        print("-------------->")
-        for book in self.availableBooks:
-            if book["quantity"] > 0:
-                print(f'{book["name"]} by {book["author"]}')
-
-    def lendBook(self, requestedBook):
-        for book in self.availableBooks:
-            if book["name"] == requestedBook:
-                if book["quantity"] > 0:
-                    book["quantity"] -= 1
-                    if self.borrowed_books:
-                        for backup_book in self.borrowed_books:
-                            if backup_book["name"] == requestedBook:
-                                backup_book["quantity_borrowed"] += 1
-                    else:
-                        self.borrowed_books.append(
-                            {"name": requestedBook,
-                             "quantity_borrowed": 1}
-                        )
-                    print(f"Great choice! {requestedBook} is now yours. Kindly return it within next 2 weeks!!")
-                    return
-        else:
-            print("Sorry, the book you requested isn't currently available in the library")
-
-    def addBook(self, newBook, qty):
-        author = input("Please enter the author of the book: ")
-        book = {
-            "name": newBook,
-            "author": author,
-            "quantity": qty
-        }
-        self.availableBooks.append(book)
-        print("Thanks for the new addition to our Library!")
-
-    def returnBook(self, returnedBook):
-        qty = int(input("How many copies would you like to return? "))
-        check = False
-        if self.borrowed_books:
-            for book in self.borrowed_books:
-                if book["name"] == returnedBook:
-                    if book["quantity_borrowed"] == qty:
-                        del self.borrowed_books[book]
-                    else:
-                        book["quantity_borrowed"] -= qty
-                    for b in self.availableBooks:
-                        if b["name"] == returnedBook:
-                            b["quantity"] += qty
-                            print("Thanks for returning the book(s)!")
-                            check = True
-        if not check:
-            print("""Sorry! It seems like this book doesn't belong to this library \
-            but we would be honoured by this addition."\
-            Would you like to donate it to our library?"\
-            Enter 'Y' to continue or 'N' to return to the main menu""")
-            answer = input()
-            if answer == 'Y':
-                self.addBook(returnedBook, qty)
-            else:
-                return
+from book import Book
+from library import Library
 
 
 def main():
     listOfBooks = [
-        {"name": "Harry Potter",
-         "author": "J.K.Rowling",
-         "quantity": 2},
-        {"name": "The Secret",
-         "author": "Rhonda Byrne",
-         "quantity": 2},
-        {"name": "The Power of your Subconscious Mind",
-         "author": "Joseph Murphy",
-         "quantity": 2}
+        Book("Harry Potter", "J.K.Rowling", 2, 1),
+        Book("Harry Potter", "J.K.Rowling", 2, 2),
+        Book("Harry Potter", "J.K.Rowling", 2, 3),
+        Book("The Secret", "Rhonda Byrne", 2, 1),
+        Book("The Power of your Subconscious Mind", "Joseph Murphy", 2, 1)
     ]
     library = Library(listOfBooks)
     while True:
@@ -91,7 +20,9 @@ def main():
         2. Request a book
         3. Return a book
         4. Add a book
-        5. Exit
+        5. Find all books containing the word you provide
+        6. Display all Volumes of the book
+        7. Exit
         """)
         choice = int(input("Enter Choice : "))
         if choice == 1:
@@ -107,6 +38,12 @@ def main():
             qty = int(input("How many copies would you like to donate? "))
             library.addBook(book, qty)
         elif choice == 5:
+            word = input("Enter the word you would like to search for : ")
+            library.search_by_word_in_book_name(word)
+        elif choice == 6:
+            book = input("Enter the book you would like to see the volumes for : ")
+            library.volumes_of_book_available(book)
+        elif choice == 7:
             sys.exit()
 
 
