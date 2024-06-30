@@ -1,0 +1,15 @@
+search by name
+search by author name
+
+- exact match -> done
+- contains word -> done
+- case (in)sensitive
+- different volumes -> done
+
+---------
+Implement return function to refactor
+
+
+def return_book_flow(library: Library, cust: Customer):
+    book = input("Enter the book you would like to borrow : ")
+    author = input("Enter the author : ")
