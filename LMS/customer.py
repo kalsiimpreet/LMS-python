@@ -19,7 +19,7 @@ class Customer:
             if check_book in book.name:
                 return book
 
-    def search_book(self, book_name: str, author_name: str, vol: int):
+    def search_book(self, book_name: str, author_name: str, vol: int) -> Book:
         for book in self.bag:
             if (book_name.lower() in book.name.lower() and author_name.lower() in book.author.lower() and vol ==
                     book.volume):
