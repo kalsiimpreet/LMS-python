@@ -7,9 +7,35 @@ search by author name
 - different volumes -> done
 
 ---------
-Implement return function to refactor
+Implement return function to refactor -> done
+
+_______________
+30 june 24
+_______________
+display customer bag
+add book id
+
+list_of_books = [catalog objects]
+catalog object = book name, author, volume, [book] --> new class
+book = name, author, volume, book id
+e.g : book = harry potter, j.k.rowling,1, [1,2]
+
+cust1_bag = harry potter, j.k.rowling,1, 1
 
 
-def return_book_flow(library: Library, cust: Customer):
-    book = input("Enter the book you would like to borrow : ")
-    author = input("Enter the author : ")
+_______________
+04 july 24
+_______________
+
+- move is_available_book() to catalog class
+- move search_catalog() to catalog class
+
+
+CLASS INFRASTRUCTURE
+_____________________
+-library --> deals with all functions related to book issue/return/add/remove etc.
+-library catalog --> list of catalog. For eg - list of : harry potter series + r.d.Burma series + game of throne series + and so on...
+    -catalog --> list of 1 series items. For eg - list of all series of harry potter + metadata
+        -book --> individual book to perform tasks upon
+-customer
+-main
