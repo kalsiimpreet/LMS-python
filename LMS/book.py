@@ -3,11 +3,11 @@
 
 class Book:
 
-    def __init__(self, book, author, copies, vol):
+    def __init__(self, book, author, vol, book_id: int):
         self.name: str = book
         self.author: str = author
-        self.quantity: int = copies
         self.volume: int = vol
+        self.book_id = book_id
 
     def book_equal_to(self, other) -> bool:
         return self.name == other.name and self.author == other.author
